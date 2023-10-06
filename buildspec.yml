@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Creating AMI backup..."
+      - aws ec2 create-image --instance-id i-027962a43049bf313 --name "MyBackup-$(date +'%Y%m%d%H%M%S')" --description "Backup taken on $(date +'%Y-%m-%d %H:%M:%S')" --no-reboot
+
+artifacts:
+  files: '**/*'
