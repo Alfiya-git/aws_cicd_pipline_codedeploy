@@ -9,7 +9,7 @@ phases:
           --instance-id i-027962a43049bf313 \
           --name "backup-CodeDeploy" \
           --tag-specifications "ResourceType=image,Tags=[{Key=name,Value=CodeDeploy}]"
-        # Replace i-027962a43049bf313 with your actual EC2 instance ID
+        
 
 # artifacts:
 #   files: '**/*'
