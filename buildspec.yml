@@ -4,7 +4,12 @@ phases:
   build:
     commands:
       - echo "Creating AMI backup..."
-      - aws ec2 create-image --instance-id i-027962a43049bf313 --name "MyBackup-$(date +'%Y%m%d%H%M%S')" --description "Backup taken on $(date +'%Y-%m-%d %H:%M:%S')" --no-reboot
+      - |
+        aws ec2 create-image \
+          --instance-id i-027962a43049bf313 \
+          --name "CodeDeploy" \
+          --tag-specifications "ResourceType=image,Tags=[{Key=name,Value=CodeDeploy}]"
+        # Replace i-027962a43049bf313 with your actual EC2 instance ID
 
-artifacts:
-  files: '**/*'
+# artifacts:
+#   files: '**/*'
