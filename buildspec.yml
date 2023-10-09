@@ -11,6 +11,6 @@ phases:
         ls -la
         pwd
         ip addr
-        ssh -i /codebuild/output/src2526760223/src ec2-user@172.31.36.243 'echo "hi"'
+        ssh -i key.pem ec2-user@172.31.36.243 'echo "hi"'
 
 
