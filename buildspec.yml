@@ -1,16 +1,18 @@
-version: 0.2
+build:
+  commands:
+    - ls -la
+    - pwd
+    # - ip addr
+    
+    # SSH into the remote server and capture the result
+    - ssh -i key.pem ec2-user@172.31.36.243 'echo "hi"'; RESULT=$?
+    
+    # Display the result of the SSH command
+    - if [ $RESULT -eq 0 ]; then
+        echo "SSH command was successful";
+      else
+        echo "SSH command failed with exit code $RESULT";
+      fi
 
-phases:
-  pre_build:
-    commands:
-      - echo "started"
-
-  build:
-    commands:
-      - |
-        ls -la
-        pwd
-        ip addr
-        ssh -i key.pem ec2-user@172.31.36.243 'echo "hi"'
 
 
