@@ -40,6 +40,8 @@ phases:
         ar=$(aws elbv2 describe-target-groups --name demo | grep "TargetGroupArn" | awk '{print $2}' | sed 's/[",]//g')
         echo $ar
         targets=$(aws elbv2 describe-target-health --target-group-arn $ar --query 'TargetHealthDescriptions[*].Target.Id' --output text)
+        echo "waiting for server to show up eta 1 min"
+        sleep 60
         aws elbv2 register-targets --target-group-arn $ar --targets Id=$di
         sleep 20
         # Deregister each target from the target group
