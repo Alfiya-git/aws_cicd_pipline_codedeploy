@@ -10,5 +10,6 @@ phases:
       - |
         ls -la
         pwd
+        ip addr
         ssh -i /home/ec2-user/key.pem ec2-user@172.31.36.243 'echo "hi"' 
 
