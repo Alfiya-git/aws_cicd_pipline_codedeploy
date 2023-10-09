@@ -12,14 +12,13 @@ phases:
     commands:
       - echo "image created"
       - echo "checking for AMI status; this may take up to 10 minutes"
-      - aa=$(aws ec2 describe-images --filters "Name=name,Values=b-$a" | grep "State" | grep "," | awk '{print $2}' | sed 's/[",]//g')
-      - echo "$aa"
-      - counter="1"
-      - while [ $counter -eq 1 ]; do
+      - |
+        counter="1"
+        while [ $counter -eq 1 ]; do
           aa=$(aws ec2 describe-images --filters "Name=name,Values=b-$a" | grep "State" | grep "," | awk '{print $2}' | sed 's/[",]//g')
           if [ "$aa" == "failed" ]; then
             echo "failed"
-            exit
+            exit 1
           elif [ "$aa" == "available" ]; then
             counter="0"
           elif [ "$aa" == "pending"  ]; then
