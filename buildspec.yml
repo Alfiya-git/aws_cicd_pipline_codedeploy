@@ -19,13 +19,13 @@ phases:
           aa=$(aws ec2 describe-images --filters "Name=name,Values=b-$a" | grep "State" | grep "," | awk '{print $2}' | sed 's/[",]//g')
           echo "$aa"
 
-          if [ "$aa" == "failed" ]; then
+          if [ "$aa" = "failed" ]; then
             echo "AMI creation failed"
             exit 1
-          elif [ "$aa" == "available" ]; then
+          elif [ "$aa" = "available" ]; then
             echo "AMI is available"
             break
-          elif [ "$aa" == "pending" ]; then
+          elif [ "$aa" = "pending" ]; then
             echo "AMI creation is pending; checking again in 20 seconds"
             sleep 20
           else
