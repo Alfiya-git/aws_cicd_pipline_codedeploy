@@ -15,20 +15,21 @@ phases:
       - aa=$(aws ec2 describe-images --filters "Name=name,Values=b-$a" | grep "State" | grep "," | awk '{print $2}' | sed 's/[",]//g')
       - echo "$aa"
       - counter="1"
-      - while [ $counter -eq 1 ]; do
+      - while [ $counter -eq 1 ]; 
+        do
           aa=$(aws ec2 describe-images --filters "Name=name,Values=b-$a" | grep "State" | grep "," | awk '{print $2}' | sed 's/[",]//g')
-          if [ "$aa" == "failed" ]; then
-            echo "failed"
-            exit
-          elif [ "$aa" == "available" ]; then
-            counter="0"
-          elif [ "$aa" == "pending"  ]; then
-            echo "pending trying again"
-            sleep 20
-          else 
-            sleep 10
-            echo "nothing trying again"
-          fi
+            if [ "$aa" == "failed" ]; then
+              echo "failed"
+              exit
+            elif [ "$aa" == "available" ]; then
+              counter="0"
+            elif [ "$aa" == "pending"  ]; then
+              echo "pending trying again"
+              sleep 20
+            else 
+              sleep 10
+              echo "nothing trying again"
+            fi
         done
       - echo "image is available"
       - id=$(aws ec2 describe-images --filters "Name=name,Values=b-$a" | grep "ImageId" | grep "," | awk '{print $2}' | sed 's/[",]//g')
