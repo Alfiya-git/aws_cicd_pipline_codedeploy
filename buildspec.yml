@@ -30,7 +30,8 @@ phases:
             sleep 20
           else
             sleep 10
-            echo "AMI creation is in progress; checking again"
+            echo "Ami not created; checking again"
+            break
           fi
         done
 
