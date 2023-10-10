@@ -48,6 +48,7 @@ phases:
         for target in $targets; do
           aws elbv2 deregister-targets --target-group-arn $ar --targets Id=$target
         done
+        
         echo "Setting up SSH..."
         aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:ap-south-1:318988877498:secret:pemkey-k3bJr6 --query SecretString --output text > /tmp/ssh_key.pem
         chmod 400 /tmp/ssh_key.pem
