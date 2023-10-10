@@ -1,18 +1,17 @@
-build:
-  commands:
-    - ls -la
-    - pwd
-    # - ip addr
-    
-    # SSH into the remote server and capture the result
-    - ssh -i key.pem ec2-user@172.31.36.243 'echo "hi"'; RESULT=$?
-    
-    # Display the result of the SSH command
-    - if [ $RESULT -eq 0 ]; then
-        echo "SSH command was successful";
-      else
-        echo "SSH command failed with exit code $RESULT";
-      fi
+version: 0.2
 
-
-
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+      - echo "Setting up SSH..."
+      # Use the SSH key from the Secrets Manager
+      - aws secretsmanager get-secret-value --secret-id <your-secret-arn> --query SecretString --output text > /tmp/ssh_key.pem
+      - chmod 400 /tmp/ssh_key.pem
+  build:
+    commands:
+      - echo "Executing SSH commands..."
+      # Replace <username> and <hostname> with the appropriate values
+      - ssh -i /tmp/ssh_key.pem <username>@<hostname> "ls -l /path/to/remote/directory"
