@@ -14,7 +14,7 @@ phases:
         chmod 400 /tmp/ssh_key.pem
         ls -la /tmp/
         cat /tmp/ssh_key.pem
-        ping -c 5 172.31.36.243
+        nc -vz -w 5 172.31.36.243 22
         ip=$(ip addr)
         echo $ip
       
