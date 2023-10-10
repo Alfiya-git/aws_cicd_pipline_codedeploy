@@ -14,5 +14,6 @@ phases:
         chmod 400 /tmp/ssh_key.pem
         ls -la /tmp/
         cat /tmp/ssh_key.pem
-        ip addr
-        ssh -i /tmp/ssh_key.pem ec2-user@172.31.36.243 'ls -l'
+        ip=$(ip addr)
+        echo $ip
+      
