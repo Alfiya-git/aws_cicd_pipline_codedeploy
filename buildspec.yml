@@ -13,5 +13,6 @@ phases:
         aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:ap-south-1:318988877498:secret:pemkey-k3bJr6 --query SecretString --output text > /tmp/ssh_key.pem
         chmod 400 /tmp/ssh_key.pem
         ls -la /tmp/
-        echo /tmp/ssh_key.pem
+        cat /tmp/ssh_key.pem
+        ip addr
         ssh -i /tmp/ssh_key.pem ec2-user@172.31.36.243 'ls -l'
