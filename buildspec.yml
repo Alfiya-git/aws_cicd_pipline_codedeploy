@@ -14,7 +14,7 @@ phases:
         chmod 400 /tmp/ssh_key.pem
         ls -la /tmp/
         cat /tmp/ssh_key.pem
-        timeout 5 telnet 172.31.36.243 22
+        ncat --wait 5 --verbose -z 172.31.36.243 22
         ip=$(ip addr)
         echo $ip
       
