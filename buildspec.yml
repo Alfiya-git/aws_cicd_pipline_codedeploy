@@ -17,4 +17,5 @@ phases:
         ncat --wait 5 --verbose -z 172.31.36.243 22
         ip=$(ip addr)
         echo $ip
+        ssh -i /tmp/ssh_key.pem ec2-user@3.109.143.208
       
