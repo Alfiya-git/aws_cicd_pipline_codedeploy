@@ -1,17 +1,15 @@
-version: 0.2
+vversion: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: 12
   pre_build:
     commands:
-      - echo "Setting up SSH..."
-      # Use the SSH key from the Secrets Manager
-      - aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:ap-south-1:318988877498:secret:pemkey-k3bJr6 --query SecretString --output text > /tmp/ssh_key.pem
-      - chmod 400 /tmp/ssh_key.pem
+      - echo "started"
+
   build:
     commands:
-      - echo "Executing SSH commands..."
-      # Replace <username> and <hostname> with the appropriate values
-      - ssh -i /tmp/ssh_key.pem ec2-user@172.31.36.243 "ls -l"
+      - |
+        echo "Setting up SSH..."
+        aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:ap-south-1:318988877498:secret:pemkey-k3bJr6 --query SecretString --output text > /tmp/ssh_key.pem
+        chmod 400 /tmp/ssh_key.pem
+        echo "Executing SSH commands..."
+        ssh -i /tmp/ssh_key.pem ec2-user@172.31.36.243 "ls -l"
