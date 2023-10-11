@@ -9,7 +9,7 @@ phases:
     commands:
       - |
         a=$(date "+%d-%m-%y-%H%M")
-        di=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Prod*" "Name=instance-state-name,Values=running" | grep InstanceId | awk '{print $2}' | sed 's/[",]//g')
+        di=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Prod*" "Name=instance-state-name,Values=running" | grep InstanceId | head -1 | awk '{print $2}' | sed 's/[",]//g')
         echo "$di"
         aws ec2 create-image --instance-id $di --name b-$a --description testing --no-reboot
         echo "image created"
