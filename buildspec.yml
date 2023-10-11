@@ -37,7 +37,7 @@ phases:
         id=$(aws ec2 describe-images --filters "Name=name,Values=b-$a" | grep "ImageId" | grep "," | awk '{print $2}' | sed 's/[",]//g')
         aws ec2 run-instances --image-id $id --instance-type t2.micro --key-name demo --subnet-id subnet-0acad34be64e11c77 --security-group-ids sg-0afdd16d5a084eb2a --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Prod-$a}]"
         di=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Prod-$a" | grep InstanceId | awk '{print $2}' | sed 's/[",]//g')
-        ii=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Prod-$a" | grep PrivateIpAddress | head -1 | grep  | awk '{print $2}' | sed 's/[",]//g')
+        ii=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Prod-$a" | grep PrivateIpAddress | head -1 | awk '{print $2}' | sed 's/[",]//g')
         echo $ii
         ar=$(aws elbv2 describe-target-groups --name demo | grep "TargetGroupArn" | awk '{print $2}' | sed 's/[",]//g')
         echo $ar
