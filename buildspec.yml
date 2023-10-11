@@ -14,7 +14,7 @@ phases:
         aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:ap-south-1:318988877498:secret:pemkey-k3bJr6 --query SecretString --output text > /tmp/ssh_key.pem
         chmod 400 /tmp/ssh_key.pem
         cat /tmp/ssh_key.pem
-        outer_ssh="ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key.pem ec2-user@3.109.143.208"
+        outer_ssh="ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key.pem ec2-user@35.154.71.243"
 
         # Construct the complete command with dynamic IP and execute it
         command_to_execute="$outer_ssh \"ssh -i /home/ec2-user/demo.pem ec2-user@$ii 'sudo git -C /var/www/html/ pull origin main'\""
